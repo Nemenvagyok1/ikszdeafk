@@ -1,8 +1,8 @@
 const mineflayer = require('mineflayer')
 
 var options = {
-    host: 'game1.falixserver.net',
-    port: 14775,
+    host: 'IkszdeSMP.aternos.me:26326',
+    port: 26326,
     username: 'Ikszde_BOT',
     version: '1.18'
   };
