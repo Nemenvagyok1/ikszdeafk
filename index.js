@@ -38,3 +38,10 @@ bot.loadPlugin(antiafk);
 bot.on("spawn", () => {
   bot.afk.start();
 });
+
+bot.on('kicked', function(reason) {
+  console.log("I got kicked for", reason, "lol");
+  bot.quit
+  bot.end
+  bot = mineflayer.createBot(options);
+});
