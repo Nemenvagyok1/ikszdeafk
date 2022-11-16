@@ -1,47 +1,47 @@
 const mineflayer = require('mineflayer')
 
-var options = {
-    host: 'IkszdeSMP.aternos.me',
-    port: 26326,
-    username: 'Ikszde_BOT',
-    version: '1.18'
-  };
-  var bot = mineflayer.createBot(options);
+const botArgs = {
+  host: 'ikszdesmp.tk',
+  port: '26326',
+  username: "Ikszde_BOT",
+  version: '1.18'
+};
 
-function lookAtNearestPlayer () {
-  const playerFilter = (entity) => entity.type === 'player'
-  const playerEntity = bot.nearestEntity(playerFilter)
-  
-  if (!playerEntity) return
-  
-  const pos = playerEntity.position.offset(0, playerEntity.height, 0)
-  bot.lookAt(pos)
-}
+const initBot = () => {
 
-bot.on('login', async function(){
-	console.log("Logged In")
-  setTimeout(function(){
-    bot.chat("/register asdmiezlol123")
-    bot.chat("/login asdmiezlol123")
-}, 2000);
-});
+  // Setup bot connection
+  let bot = mineflayer.createBot(botArgs);
 
-bot.on('chat', (username, message) => {
-    console.log(`${username} said "${message}"`)
-  })
-  
+  bot.on('login', () => {
+      let botSocket = bot._client.socket;
+      console.log(`Logged in to ${botSocket.server ? botSocket.server : botSocket._host}`);
+      setTimeout(function(){
+        bot.chat("/register asdmiezlol123")
+        bot.chat("/login asdmiezlol123")
+    }, 2000);
+  });
 
-bot.on('physicTick', lookAtNearestPlayer)
+  bot.on('end', () => {
+      console.log(`Disconnected`);
 
-const antiafk = require("mineflayer-antiafk");
-bot.loadPlugin(antiafk);
-bot.on("spawn", () => {
-  bot.afk.start();
-});
+      // Attempt to reconnect
+      setTimeout(initBot, 30000);
+  });
 
-bot.on('kicked', function(reason) {
-  console.log("I got kicked for", reason, "lol");
-  bot.quit
-  bot.end
-  bot = mineflayer.createBot(options);
-});
+  const antiafk = require("mineflayer-antiafk");
+    bot.loadPlugin(antiafk);
+    bot.on("spawn", () => {
+    bot.afk.start();
+  });
+
+  bot.on('error', (err) => {
+      if (err.code === 'ECONNREFUSED') {
+          console.log(`Failed to connect to ${err.address}:${err.port}`)
+      }
+      else {
+          console.log(`Unhandled error: ${err}`);
+      }
+  });
+};
+
+initBot();
