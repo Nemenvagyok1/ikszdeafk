@@ -21,7 +21,7 @@ function lookAtNearestPlayer () {
 bot.on('login', async function(){
 	console.log("Logged In")
   setTimeout(function(){
-    bot.chat("/register asdmiezlol123 asdmiezlol123")
+    bot.chat("/register asdmiezlol123")
     bot.chat("/login asdmiezlol123")
 }, 2000);
 });
