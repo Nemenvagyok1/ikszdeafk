@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer')
 
 var options = {
-    host: 'IkszdeSMP.aternos.me:26326',
+    host: 'IkszdeSMP.aternos.me',
     port: 26326,
     username: 'Ikszde_BOT',
     version: '1.18'
