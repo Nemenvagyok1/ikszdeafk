@@ -25,7 +25,7 @@ const initBot = () => {
       console.log(`Disconnected`);
 
       // Attempt to reconnect
-      setTimeout(initBot, 30000);
+      setTimeout(initBot, 60000);
   });
 
   const antiafk = require("mineflayer-antiafk");
