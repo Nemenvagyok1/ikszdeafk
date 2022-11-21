@@ -1,8 +1,8 @@
 const mineflayer = require('mineflayer')
 
 const botArgs = {
-  host: 'ikszdesmp.tk',
-  port: '26326',
+  host: 'game1.falixserver.net',
+  port: '14775',
   username: "Ikszde_BOT",
   version: '1.18'
 };
